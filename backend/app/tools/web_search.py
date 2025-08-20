@@ -26,7 +26,7 @@ class TavilyWebSearchTool(BaseTool):
     )
     args_schema: type[BaseModel] = WebSearchArgs
 
-    def _run(self, query: str, max_results: int = 5) -> str:
+    def _run(self, query: str, max_results: int = 10) -> str:
         api_key: Optional[str] = os.getenv("TAVILY_API_KEY")
         if not api_key:
             return "Web search not available. TAVILY_API_KEY is missing."
@@ -58,6 +58,7 @@ class TavilyWebSearchTool(BaseTool):
             for r in results[:8]:
                 title = r.get("title") or "Untitled"
                 url = r.get("url") or ""
-                snippet = (r.get("content") or "")[:280].strip().replace("\n", " ")
+                # snippet = (r.get("content") or "")[:280].strip().replace("\n", " ")
+                snippet = (r.get("content") or "")
                 lines.append(f"- {title} | {url}\n  Snippet: {snippet}")
         return "\n".join(lines).strip() or "No results."
