@@ -3,18 +3,18 @@ from crewai import Agent, LLM
 import os
 
 def create_writer_agent(model: str | None = None, api_key: str | None = None, verbose: bool = True) -> Agent:
-    # prefer env if not provided
+    # Get model from environment or use default
     model = model or os.getenv("LLM_MODEL", "gpt-4o-mini")
     api_key = api_key or os.getenv("OPENAI_API_KEY")
 
-    # Create LLM instance
     llm = LLM(model=model, api_key=api_key)
 
     backstory = (
-        "You are a social media content writer. You convert research findings into posts that engage the audience. "
-        "You adjust the tone based on the platform, and your writing should be clear, concise, and impactful. "
-        "The goal is to craft posts and articles that will resonate with readers and prompt them to take action. "
-        "Do not use emojis or the em dash character. Focus on persuasive and effective language."
+        "You are a content writer for social media platforms. "
+        "You convert research findings into a post suitable for {platform}. "
+        "Your writing style should match the tone of the platform and the user's preferences. "
+        "Adjust tone to {tone} while respecting platform conventions. "
+        "The goal is to engage the audience while being clear and concise."
     )
 
     return Agent(
