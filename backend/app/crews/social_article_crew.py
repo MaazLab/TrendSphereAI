@@ -4,6 +4,8 @@ from agents.research_agent import create_research_agent
 from tasks.research_task import create_research_task
 from agents.writer_agent import create_writer_agent
 from tasks.writer_task import create_write_task
+from agents.editor_agent import create_editor_agent 
+from tasks.editor_task import create_editor_task
 
 # Create the Research Crew
 def create_research_crew(model: str | None = None, verbose: bool = True) -> Crew:
@@ -22,3 +24,13 @@ def create_writer_crew(model: str | None = None, verbose: bool = True) -> Crew:
     task = create_write_task(agent)
     print("DEBUG\t\t task: ", task)
     return Crew(agents=[agent], tasks=[task])
+
+# Create the Editor Crew
+def create_editor_crew(model: str | None = None, verbose: bool = True) -> Crew:
+    print("FUNC: create_editor_crew")
+    agent = create_editor_agent(model=model, verbose=verbose)
+    print("DEBUG\t\t agent: ", agent)
+    task = create_editor_task(agent)
+    print("DEBUG\t\t task: ", task)
+    return Crew(agents=[agent], tasks=[task])
+
