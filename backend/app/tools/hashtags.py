@@ -61,12 +61,12 @@ class HashtagArgs(BaseModel):
 
 class HashtagSuggestTool(BaseTool):
     name: str = "hashtag_suggest_tool"
-    description = (
+    description: str = (
         "Tool Name: hashtag_suggest_tool\n"
         "Tool Arguments: {'platform': 'str', 'keywords': 'List[str]', 'text': 'str', 'max_total': 'int'}\n"
         "Tool Description: Builds Primary/Niche/Broad hashtags for a platform from keywords."
     )
-    args_schema = HashtagArgs
+    args_schema: type[BaseModel] = HashtagArgs
 
     def _run(self, platform: str = "LinkedIn",
              keywords: Optional[List[str]] = None,

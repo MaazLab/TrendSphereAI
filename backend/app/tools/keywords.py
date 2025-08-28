@@ -85,12 +85,12 @@ class KeywordArgs(BaseModel):
 
 class KeywordSuggestTool(BaseTool):
     name: str = "keyword_suggest_tool"
-    description = (
+    description: str = (
         "Tool Name: keyword_suggest_tool\n"
         "Tool Arguments: {'text': 'Input text', 'topic': 'Optional topic hint', 'max_keywords': 'int 5-50'}\n"
         "Tool Description: Extracts & ranks 1-3 word keywords/phrases without external APIs."
     )
-    args_schema = KeywordArgs
+    args_schema: type[BaseModel] = KeywordArgs
 
     def _run(self, text: str, topic: Optional[str] = None, max_keywords: int = 25) -> Dict[str, Any]:
         kw = _score_phrases(text, topic, max_keywords)
