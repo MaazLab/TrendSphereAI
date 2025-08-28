@@ -41,8 +41,8 @@ def create_editor_crew(model: str | None = None, verbose: bool = True) -> Crew:
     return Crew(agents=[agent], tasks=[task])
 
 # Create the SEO Crew
-def create_seo_crew(model: str | None = None):
-    seo_agent = create_seo_agent(model=model)
+def create_seo_crew(model: str | None = None,  verbose: bool = True):
+    seo_agent = create_seo_agent(model=model, verbose=verbose)
     seo_task = create_seo_task(seo_agent)
     return Crew(
         agents=[seo_agent],

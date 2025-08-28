@@ -3,7 +3,7 @@
 from crewai import Agent
 from crewai.llm import LLM
 
-def create_seo_agent(model: str | None = None):
+def create_seo_agent(model: str | None = None, verbose: bool = True):
     return Agent(
         role="SEO Optimization Specialist",
         goal=(
@@ -16,6 +16,6 @@ def create_seo_agent(model: str | None = None):
             "copy without changing meaning or tone."
         ),
         llm=LLM(model=model) if model else None,
-        verbose=True,
+        verbose=verbose,
         allow_delegation=False,
     )
